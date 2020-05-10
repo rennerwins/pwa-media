@@ -1,209 +1,269 @@
 import Head from 'next/head'
+import Nav from '../src/components/nav'
+
+const getMedia = () => {
+	if ('mediaSession' in navigator) {
+		console.log('navigator', navigator)
+
+		navigator.mediaSession.metadata = new MediaMetadata({
+			title: 'Never Gonna Give You Up',
+			artist: 'Rick Astley',
+			album: 'Whenever You Need Somebody',
+			artwork: [
+				{
+					src: 'https://dummyimage.com/96x96',
+					sizes: '96x96',
+					type: 'image/png',
+				},
+				{
+					src: 'https://dummyimage.com/128x128',
+					sizes: '128x128',
+					type: 'image/png',
+				},
+				{
+					src: 'https://dummyimage.com/192x192',
+					sizes: '192x192',
+					type: 'image/png',
+				},
+				{
+					src: 'https://dummyimage.com/256x256',
+					sizes: '256x256',
+					type: 'image/png',
+				},
+				{
+					src: 'https://dummyimage.com/384x384',
+					sizes: '384x384',
+					type: 'image/png',
+				},
+				{
+					src: 'https://dummyimage.com/512x512',
+					sizes: '512x512',
+					type: 'image/png',
+				},
+			],
+		})
+
+		navigator.mediaSession.setActionHandler('play', function () {})
+		navigator.mediaSession.setActionHandler('pause', function () {})
+		navigator.mediaSession.setActionHandler('seekbackward', function () {})
+		navigator.mediaSession.setActionHandler('seekforward', function () {})
+		navigator.mediaSession.setActionHandler('previoustrack', function () {})
+		navigator.mediaSession.setActionHandler('nexttrack', function () {})
+	}
+}
 
 export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	React.useEffect(() => {
+		getMedia()
+	}, [])
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+	return (
+		<div className='container'>
+			<Nav />
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+			<main>
+				<h1 className='title'>
+					Welcome to <a href='https://nextjs.org'>Next.js</a>
+				</h1>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+				<audio controls>
+					<source
+						src='https://audio.simplecast.com/77f59f5d.mp3'
+						type='audio/mpeg'
+					/>
+				</audio>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+				<p className='description'>
+					Get started by editing <code>pages/index.js</code>
+				</p>
 
-          <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+				<div className='grid'>
+					<a href='https://nextjs.org/docs' className='card'>
+						<h3>Documentation &rarr;</h3>
+						<p>Find in-depth information about Next.js features and API.</p>
+					</a>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+					<a href='https://nextjs.org/learn' className='card'>
+						<h3>Learn &rarr;</h3>
+						<p>Learn about Next.js in an interactive course with quizzes!</p>
+					</a>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
+					<a
+						href='https://github.com/zeit/next.js/tree/master/examples'
+						className='card'
+					>
+						<h3>Examples &rarr;</h3>
+						<p>Discover and deploy boilerplate example Next.js projects.</p>
+					</a>
 
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+					<a
+						href='https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+						className='card'
+					>
+						<h3>Deploy &rarr;</h3>
+						<p>
+							Instantly deploy your Next.js site to a public URL with Vercel.
+						</p>
+					</a>
+				</div>
+			</main>
 
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+			<footer>
+				<a
+					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					Powered by{' '}
+					<img src='/vercel.svg' alt='Vercel Logo' className='logo' />
+				</a>
+			</footer>
 
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+			<style jsx>{`
+				.container {
+					min-height: 100vh;
+					padding: 0 0.5rem;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
 
-        footer img {
-          margin-left: 0.5rem;
-        }
+				main {
+					padding: 5rem 0;
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
 
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+				footer {
+					width: 100%;
+					height: 100px;
+					border-top: 1px solid #eaeaea;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
 
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
+				footer img {
+					margin-left: 0.5rem;
+				}
 
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
+				footer a {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
 
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
+				a {
+					color: inherit;
+					text-decoration: none;
+				}
 
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
+				.title a {
+					color: #0070f3;
+					text-decoration: none;
+				}
 
-        .title,
-        .description {
-          text-align: center;
-        }
+				.title a:hover,
+				.title a:focus,
+				.title a:active {
+					text-decoration: underline;
+				}
 
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
+				.title {
+					margin: 0;
+					line-height: 1.15;
+					font-size: 4rem;
+				}
 
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
+				.title,
+				.description {
+					text-align: center;
+				}
 
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
+				.description {
+					line-height: 1.5;
+					font-size: 1.5rem;
+				}
 
-          max-width: 800px;
-          margin-top: 3rem;
-        }
+				code {
+					background: #fafafa;
+					border-radius: 5px;
+					padding: 0.75rem;
+					font-size: 1.1rem;
+					font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+						DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+				}
 
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
+				.grid {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-wrap: wrap;
 
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
+					max-width: 800px;
+					margin-top: 3rem;
+				}
 
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
+				.card {
+					margin: 1rem;
+					flex-basis: 45%;
+					padding: 1.5rem;
+					text-align: left;
+					color: inherit;
+					text-decoration: none;
+					border: 1px solid #eaeaea;
+					border-radius: 10px;
+					transition: color 0.15s ease, border-color 0.15s ease;
+				}
 
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
+				.card:hover,
+				.card:focus,
+				.card:active {
+					color: #0070f3;
+					border-color: #0070f3;
+				}
 
-        .logo {
-          height: 1em;
-        }
+				.card h3 {
+					margin: 0 0 1rem 0;
+					font-size: 1.5rem;
+				}
 
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
+				.card p {
+					margin: 0;
+					font-size: 1.25rem;
+					line-height: 1.5;
+				}
 
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
+				.logo {
+					height: 1em;
+				}
 
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+				@media (max-width: 600px) {
+					.grid {
+						width: 100%;
+						flex-direction: column;
+					}
+				}
+			`}</style>
+
+			<style jsx global>{`
+				html,
+				body {
+					padding: 0;
+					margin: 0;
+					font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+						Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+						sans-serif;
+				}
+
+				* {
+					box-sizing: border-box;
+				}
+			`}</style>
+		</div>
+	)
 }
